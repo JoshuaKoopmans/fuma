@@ -1265,10 +1265,13 @@ class ReadJaffaResults(FusionDetectionExperiment):
 	"""
 	
 	parse_left_chr_column = 2
-	parse_right_chr_column = 4
+	parse_right_chr_column = 5
 	
 	parse_left_pos_column = 3
-	parse_right_pos_column = 5
+	parse_right_pos_column = 6
+
+	parse_left_strand = 4
+	parse_right_strand = 7
 	
 	logger = logging.getLogger("FuMa::Readers::ReadJaffaResults")
 	
@@ -1303,14 +1306,17 @@ class ReadJaffaResults(FusionDetectionExperiment):
 		
 		left_pos = line[self.parse_left_pos_column].strip('"')
 		right_pos = line[self.parse_right_pos_column].strip('"')
+
+		left_strand = line[self.parse_left_strand].strip('"')
+		right_strand = line[self.parse_right_strand].strip('"')
 		
 		f = Fusion( \
 			left_chr, \
 			right_chr, \
 			left_pos, \
 			right_pos, \
-			None, \
-			None, \
+			left_strand, \
+			right_strand, \
 			self.name, \
 			str(self.i), \
 			False # The authors claim that for this tool acceptator donor strand is not preserved - therefore this has to be false
