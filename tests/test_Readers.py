@@ -254,7 +254,7 @@ class TestReadJaffaResults(unittest.TestCase):
 		self.assertEqual(fusions[1].left_break_position , 59445688)
 		self.assertEqual(fusions[1].right_break_position , 49411710)
 		self.assertEqual(fusions[1].left_strand , STRAND_REVERSE)
-		self.assertEqual(fusions[1].right_strand , STRAND_FORWARD)
+		self.assertEqual(fusions[1].right_strand , STRAND_REVERSE)
 		#self.assertEqual(fusions[0].acceptor_donor_direction , None)
 		
 		# @todo
