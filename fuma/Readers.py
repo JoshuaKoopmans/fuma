@@ -1304,8 +1304,6 @@ class ReadJaffaResults(FusionDetectionExperiment):
         self.logger.debug("Parsed fusion genes: " + str(len(self)))
 
     def parse_line(self, line):
-        self.logger.debug("Left pos: " + str(self.parse_left_pos_column))
-        self.logger.debug("Right pos: " + str(self.parse_right_pos_column))
         line = line.strip().split(",")
 
         left_chr = line[self.parse_left_chr_column].strip('"')
