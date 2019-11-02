@@ -115,7 +115,6 @@ class Fusion:
 		self.left_chr_str = arg_left_chr
 		self.right_chr_str = arg_right_chr
 
-		print(arg_left_pos, arg_right_pos)
 		self.left_break_position = int(str(arg_left_pos).replace(",",""))
 		self.right_break_position = int(str(arg_right_pos).replace(",",""))
 		
