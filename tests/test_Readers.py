@@ -244,8 +244,8 @@ class TestReadJaffaResults(unittest.TestCase):
 		self.assertEqual(fusions[0].get_right_chromosome(True) , 'chr20')
 		self.assertEqual(fusions[0].left_break_position , 46365686)
 		self.assertEqual(fusions[0].right_break_position , 47538547)
-		self.assertEqual(fusions[0].left_strand , None)
-		self.assertEqual(fusions[0].right_strand , None)
+		self.assertEqual(fusions[0].left_strand , STRAND_FORWARD)
+		self.assertEqual(fusions[0].right_strand , STRAND_FORWARD)
 		self.assertEqual(fusions[0].acceptor_donor_direction , None)
 		
 		#dataset 'test'): chr17:59445688(?)<-chr20:49411710(?)
@@ -253,8 +253,8 @@ class TestReadJaffaResults(unittest.TestCase):
 		self.assertEqual(fusions[1].get_right_chromosome(True) , 'chr20')
 		self.assertEqual(fusions[1].left_break_position , 59445688)
 		self.assertEqual(fusions[1].right_break_position , 49411710)
-		self.assertEqual(fusions[1].left_strand , None)
-		self.assertEqual(fusions[1].right_strand , None)
+		self.assertEqual(fusions[1].left_strand , STRAND_REVERSE)
+		self.assertEqual(fusions[1].right_strand , STRAND_FORWARD)
 		self.assertEqual(fusions[0].acceptor_donor_direction , None)
 		
 		# @todo
