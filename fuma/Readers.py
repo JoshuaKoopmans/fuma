@@ -1319,7 +1319,7 @@ class ReadJaffaResults(FusionDetectionExperiment):
 			right_strand, \
 			self.name, \
 			str(self.i), \
-			False # The authors claim that for this tool acceptator donor strand is not preserved - therefore this has to be false
+			True # The authors claim that for this tool acceptator donor strand is not preserved - therefore this has to be false
 		)
 		self.add_fusion(f)
 
