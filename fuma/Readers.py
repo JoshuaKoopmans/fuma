@@ -1315,14 +1315,14 @@ class ReadJaffaResults(FusionDetectionExperiment):
         right_pos = line[self.parse_right_pos_column].strip('"')
 
         f = Fusion(
-            left_chr, \
-            right_chr, \
-            left_pos, \
-            right_pos, \
-            line[self.parse_left_strand_column], \
-            line[self.parse_right_strand_column], \
-            self.name, \
-            str(self.i), \
+            left_chr,
+            right_chr,
+            left_pos,
+            right_pos,
+            str(line[self.parse_left_strand_column].strip('"')),
+            str(line[self.parse_right_strand_column].strip('"')),
+            self.name,
+            str(self.i),
             False
             # The authors claim that for this tool acceptator donor strand is not preserved - therefore this has to be false
         )
