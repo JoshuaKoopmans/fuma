@@ -1588,23 +1588,23 @@ class ReadArribaResults(FusionDetectionExperiment):
 
     def parse_line(self, line):
         line = line.strip().split("\t")
+        if not line[0].startswith("#"):
+            left_chr, left_pos = line[self.parse_left_chr_and_breakpoint_column].split(":")
+            right_chr, right_pos = line[self.parse_right_chr_and_breakpoint_column].split(":")
 
-        left_chr, left_pos = line[self.parse_left_chr_and_breakpoint_column].split(":")
-        right_chr, right_pos = line[self.parse_right_chr_and_breakpoint_column].split(":")
+            left_strand = line[self.parse_left_strand_column].split("/")[1]
+            right_strand = line[self.parse_right_strand_column].split("/")[1]
 
-        left_strand = line[self.parse_left_strand_column].split("/")[1]
-        right_strand = line[self.parse_right_strand_column].split("/")[1]
-
-        f = Fusion(
-            left_chr,
-            right_chr,
-            left_pos,
-            right_pos,
-            left_strand,
-            right_strand,
-            self.name,
-            str(self.i),
-            True
-        )
-        self.add_fusion(f)
+            f = Fusion(
+                left_chr,
+                right_chr,
+                left_pos,
+                right_pos,
+                left_strand,
+                right_strand,
+                self.name,
+                str(self.i),
+                True
+            )
+            self.add_fusion(f)
 
