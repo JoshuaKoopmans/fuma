@@ -41,6 +41,7 @@ Bioinformatics first published online December 10, 2015
 ## Introduction ##
 This is the Manual as part of the Supplementary Material that belongs to the manuscript: *FuMa: reporting overlap in RNA-seq detected fusion genes*. FuMa (Fusion Matcher) matches predicted fusion events (both genomic and transcriptomic) according to chromosomal location and corresponding annotated genes. It is the organisation of the transcriptome (provided by the user) that forms the basis for FuMa to consider fusion genes to be identical or not. The provided gene annotation can be adjusted to define the biological question. For example, if it is desired to only consider fusion events that occur within exons, FuMa can be provided a list of such regions instead of entire genes. Currently FuMa supports input files from:
 
++   Arriba ([https://github.com/suhrig/arriba](https://github.com/suhrig/arriba))
 +	Chimera (Beccuti et al., 2014)
 +	ChimeraScan (Iyer et al., 2011)
 +	CompleteGenomics (Carnevali et al., 2012)
@@ -412,6 +413,7 @@ FuMa supports the following file formats:
 
 | Tools              | File                  | Format string
 |:-------------------|:----------------------|:-------------
+| Arriba             | fusions.tsv           | arriba
 | Chimera            | prettyPrint() output  | chimera
 | ChimeraScan        | chimeras.bedpe        | chimerascan
 | Complete Genomics  | highConfidenceJu*.tsv | complete-genomics
