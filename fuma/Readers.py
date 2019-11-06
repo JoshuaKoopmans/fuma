@@ -1558,8 +1558,8 @@ class ReadArribaResults(FusionDetectionExperiment):
     parse_left_chr_and_breakpoint_column = 4
     parse_right_chr_and_breakpoint_column = 5
 
-    parse_left_strand_column = 4
-    parse_right_strand_column = 7
+    parse_left_strand_column = 2
+    parse_right_strand_column = 3
 
     logger = logging.getLogger("FuMa::Readers::ReadArribaResults")
 
