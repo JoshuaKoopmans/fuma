@@ -1605,7 +1605,6 @@ class ReadArribaResults(FusionDetectionExperiment):
             self.name,
             str(self.i),
             True
-
         )
         self.add_fusion(f)
 
