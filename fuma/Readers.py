@@ -1544,3 +1544,68 @@ class ReadTrinityGMAP(FusionDetectionExperiment):
                 m = re.search(self.regexes[key], line)
                 keys[key] = m.groups()
         return keys
+
+class ReadArribaResults(FusionDetectionExperiment):
+    """Example file syntax:
+    #gene1	gene2	strand1(gene/fusion)	strand2(gene/fusion)	breakpoint1	breakpoint2	site1	site2	type	direction1	direction2	split_reads1	split_reads2	discordant_mates	coverage1	coverage2	confidence	closest_genomic_breakpoint1	closest_genomic_breakpoint2	filters	fusion_transcript	reading_frame	peptide_sequence	read_identifiers
+    BCR	ABL1	+/+	+/+	22:23290413	9:130854064	splice-site	splice-site	translocation	downstream	upstream	17	14	10	128	49	high	.	.	duplicates(6)	.	.	.	.
+    ABL1	BCR	+/+	+/+	9:130714455	22:23292541	splice-site	splice-site	translocation	downstream	upstream	7	5	3	13	82	high	.	.	duplicates(2)	.	.	.	.
+    ABL1	BCR	+/+	+/+	9:130714455	22:23295024	splice-site	splice-site	translocation	downstream	upstream	0	2	2	13	103	high	.	.	.	.	.	.	.
+    ABL1	BCR	+/+	+/+	9:130714455	22:23309424	splice-site	splice-site	translocation	downstream	upstream	0	1	1	13	149	high	.	.	duplicates(2)	.	.	.	.
+    CR381653.1	CR381670.1	+/+	+/-	21:9327298	21:8859114	splice-site	intron	inversion/3'-3'	downstream	downstream	0	1	2	19	11	high	.	.	.	.	.	.	.
+    """
+
+    parse_left_chr_and_breakpoint_column = 4
+    parse_right_chr_and_breakpoint_column = 5
+
+    parse_left_strand_column = 4
+    parse_right_strand_column = 7
+
+    logger = logging.getLogger("FuMa::Readers::ReadArribaResults")
+
+    def __init__(self, arg_filename, name):
+        FusionDetectionExperiment.__init__(self, name)
+
+        self.filename = arg_filename
+
+        self.parse()
+
+    def parse(self):
+        self.logger.info("Parsing file: " + str(self.filename))
+
+        self.i = 0
+
+        with open(self.filename, "r") as fh:
+            for line in fh:
+                line = line.strip()
+                if (len(line) > 0):
+                    if (self.i > 0):  # otherwise it's the header
+                        self.parse_line(line)
+
+                    self.i += 1
+
+        self.logger.debug("Parsed fusion genes: " + str(len(self)))
+
+    def parse_line(self, line):
+        line = line.strip().split("\t")
+
+        left_chr, left_pos = line[self.parse_left_chr_and_breakpoint_column].split(":")
+        right_chr, right_pos = line[self.parse_right_chr_and_breakpoint_column].split(":")
+
+        left_strand = line[self.parse_left_strand_column].split("/")[1]
+        right_strand = line[self.parse_right_strand_column].split("/")[1]
+
+        f = Fusion(
+            left_chr,
+            right_chr,
+            left_pos,
+            right_pos,
+            left_strand,
+            right_strand,
+            self.name,
+            str(self.i),
+            True
+
+        )
+        self.add_fusion(f)
+
